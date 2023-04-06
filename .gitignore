@@ -1,0 +1,11 @@
+.idea
+.vscode
+__pycache__
+*.logs
+media
+env
+venv
+Lib
+Scripts
+*.sqlite3
+pyvenv.cfg
