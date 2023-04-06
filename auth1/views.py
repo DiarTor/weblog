@@ -2,4 +2,4 @@ from django.shortcuts import render
 
 # Create your views here.
 def signup(request):
-    return render(request, "templates/auth1/signup.html")
+    return render(request, "auth1/signup.html")
