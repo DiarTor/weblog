@@ -7,8 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{% static '../static/base.css' %}">
     <title>{% block title %}{% endblock %}</title>
- {% block head %}
+{#    where we add some style in other files#}
+    {% block style %}
+
     {% endblock %}
+{#    end#}
 </head>
 <body>
 {#including all pages#}
