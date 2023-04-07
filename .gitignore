@@ -9,4 +9,4 @@ Lib
 Scripts
 *.sqlite3
 pyvenv.cfg
-blog/migrations
+*/migrations
