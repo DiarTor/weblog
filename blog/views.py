@@ -5,7 +5,7 @@ from .models import Post
 # Create your views here.
 # @login_required(login_url="/account/login/")
 def home(request):
-    posts = Post.objects.all()
+    posts = Post.objects.all().order_by('-create_date')
     if request.method == "POST":
         post_id = request.POST.get("post-id")
         print(post_id)
