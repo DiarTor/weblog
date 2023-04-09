@@ -1,10 +1,18 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
+from .models import Post
 # Create your views here.
 # @login_required(login_url="/account/login/")
 def home(request):
-    return render(request, "blog/home.html")
+    posts = Post.objects.all()
+    if request.method == "POST":
+        post_id = request.POST.get("post-id")
+        print(post_id)
+        post = Post.objects.filter(id=post_id).first()
+        if post and post.author == request.user:
+            post.delete()
+    return render(request, "blog/home.html", {'posts':posts})
 
 @login_required(login_url="/account/login/")
 def create_post(request):
