@@ -1,7 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm
-from .models import Post
+from .models import Post, Like
+
+
 # Create your views here.
 # @login_required(login_url="/account/login/")
 def home(request):
@@ -12,7 +14,27 @@ def home(request):
         post = Post.objects.filter(id=post_id).first()
         if post and post.author == request.user:
             post.delete()
-    return render(request, "blog/home.html", {'posts':posts})
+    return render(request, "blog/home.html", {'posts': posts})
+
+
+def like_post(request):
+    user = request.user
+    if request.method == "POST":
+        post_id = request.POST.get('post_id')
+        post = Post.objects.get(id=post_id)
+    if user in post.liked.all():
+        post.liked.remove(user)
+    else:
+        post.liked.add(user)
+    like, created = Like.objects.get_or_create(user=user, post_id=post_id)
+    if not created:
+        if like.value == 'Like':
+            like.value = 'Unlike'
+        else:
+            like.value = 'Like'
+    like.save()
+    return redirect("home-page")
+
 
 @login_required(login_url="/account/login/")
 def create_post(request):
@@ -25,4 +47,4 @@ def create_post(request):
             return redirect("home-page")
     else:
         form = PostForm()
-    return render(request, 'blog/create_post.html', {'form':form})
+    return render(request, 'blog/create_post.html', {'form': form})
