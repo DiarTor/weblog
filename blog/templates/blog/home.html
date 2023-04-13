@@ -22,6 +22,7 @@ Home Page
                             <button type="submit" class="btn btn-danger" name="post-id" value="{{ post.id}}">Delete</button>
                         </form>
                     {% endif %}
+                {% if user.is_authenticated %}
                     <form action="{% url 'like-post' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="post_id" value="{{ post.id }}">
@@ -31,6 +32,7 @@ Home Page
                             <button class="btn btn-primary" type="submit">Unlike</button>
                         {% endif %}
                     </form>
+                {% endif %}
                     <strong>{{ post.liked.all.count }} Likes</strong>
                 </div>
             </div>
