@@ -21,7 +21,7 @@ class Post(models.Model):
 
 
 like_choices = (
-    ("Like", "like"),
+    ("Like", "Like"),
     ("Unlike", "Unlike"),
 )
 
