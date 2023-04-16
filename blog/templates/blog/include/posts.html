@@ -1,5 +1,4 @@
-{% for post in posts %}
-        <div class="card mt-2">
+ <div class="card mt-2">
             <div class="card-header">
                 <strong>Poster : {{ post.author.username }}</strong>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -15,13 +14,13 @@
                             {% endif %}
                         </form>
                     {% endif %}
-                    <a href="{% url 'comments' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">Comment</button></a>
                     {% if user == post.author %}
                         <form method="post">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id}}">Delete</button>
                         </form>
                     {% endif %}
+                    <a href="{% url 'comments' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">Comment</button></a>
                 </div>
             </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -34,12 +33,19 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <hr>
                     <p>{{ post.content }}</p>
+                    <strong>Comments :</strong>
+                    {% for comment in comments %}
+                        {% if post.id == comment.post_id %}
+                        <h6>User : {{ comment.user.username }}</h6>
+                        <p>comment : {{ comment.content }}</p>
+                        <date>{{ comment.created_date }}</date>
+                        <hr>
+                        {% endif %}
+                    {% endfor %}
+
                 </div>
             </div>
         <div class="card-footer text-muted">
             {{ post.create_date }}
         </div>
         </div>
-        {% empty %}
-        <p>No Posts</p>
-    {% endfor %}

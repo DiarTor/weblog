@@ -3,5 +3,9 @@
 Home Page
 {% endblock %}
 {% block content %}
-    {% include 'blog/include/posts.html' %}
+    {% for post in posts %}
+        {% include 'blog/include/posts.html' %}
+        {% empty %}
+        <p>No Posts</p>
+    {% endfor %}
 {% endblock %}
