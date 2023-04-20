@@ -33,10 +33,10 @@
                     <h5 class="card-title">{{ post.title }}</h5>
                     <hr>
                     <p>{{ post.content }}</p>
-                    <strong>Comments :</strong>
+                    <strong>Comments :</strong><br><br>
                     {% for comment in comments %}
                         {% if post.id == comment.post_id %}
-                        <h6>User : {{ comment.user.username }}</h6>
+                        <strong>User : {{ comment.user.username }}</strong>
                         <p>comment : {{ comment.content }}</p>
                         <date>{{ comment.created_date }}</date>
                         <hr>

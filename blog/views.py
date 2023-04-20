@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm, CommentForm
-from .models import Post, Like, Comment
+from .models import Post,Comment
 from django.http import HttpResponse
 
 
@@ -56,11 +56,4 @@ def like_post(request):
         post.liked.remove(user)
     else:
         post.liked.add(user)
-    like, created = Like.objects.get_or_create(user=user, post_id=post_id)
-    if not created:
-        if like.value == 'Like':
-            like.value = 'Unlike'
-        else:
-            like.value = 'Like'
-    like.save()
     return redirect("home-page")
