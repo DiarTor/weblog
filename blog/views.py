@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import PostForm, CommentForm
-from .models import Post,Comment
+from .models import Post, Comment
 from django.http import HttpResponse
 
 
@@ -56,4 +56,15 @@ def like_post(request):
         post.liked.remove(user)
     else:
         post.liked.add(user)
+    return redirect("home-page")
+
+def like_comment(request):
+    user = request.user
+    if request.method == "POST":
+        cmnt_id = request.POST.get('comment_id')
+        cmnt = Comment.objects.get(id=cmnt_id)
+    if user in cmnt.liked.all():
+        cmnt.liked.remove(user)
+    else:
+        cmnt.liked.add(user)
     return redirect("home-page")
