@@ -21,6 +21,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField(max_length=500)
     created_date = models.DateTimeField(auto_now_add=True)
+    liked = models.ManyToManyField(User, related_name="like_comment", default=None, blank=True)
 
     def __str__(self):
-        return f"User : {self.user} \n Comment : {self.content}"
+        return f"User : {self.user}"
