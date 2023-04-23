@@ -24,10 +24,7 @@
         <div>
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-                        <span class="navbar-text">{{ user.get_username }} |</span>
-                    <li class="nav-item">
-                        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
-                    </li>
+                    <span class="navbar-text"><a href="#">{{ user.get_username }}</a></span>
                 {% else %}
                     <li class="nav-item">
                         <a href="{% url 'login' %}" class="nav-link">Login</a>
