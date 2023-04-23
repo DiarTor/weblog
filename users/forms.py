@@ -17,3 +17,7 @@ class ChangeUsernameForm(forms.Form):
     username_help_text = "Enter Your New Username"
     new_username = forms.CharField(max_length=50, help_text=username_help_text)
 
+    @property
+    def check_exist(self):
+        if User.objects.filter(username=self.new_username).exists():
+            return True
