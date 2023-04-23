@@ -24,7 +24,11 @@
         <div>
             <ul class="navbar-nav">
                 {% if user.is_authenticated %}
-                    <span class="navbar-text"><a href="#">{{ user.get_username }}</a></span>
+                    <a href="{% url 'profile' %}">
+                    <button type="button" class="btn btn-secondary">
+                        {{ user.username }}
+                    </button>
+                    </a>
                 {% else %}
                     <li class="nav-item">
                         <a href="{% url 'login' %}" class="nav-link">Login</a>

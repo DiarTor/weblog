@@ -4,6 +4,9 @@ from users.forms import RegisterForm, ChangeUsernameForm
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 # Create your views here.
+
+def profile(request):
+    return render(request, 'users/profile.html')
 def sign_up(request):
     if request.method == "POST":
         form = RegisterForm(request.POST)
