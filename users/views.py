@@ -6,10 +6,14 @@ from users.forms import RegisterForm, ChangeUsernameForm
 from django.contrib.auth.models import User
 from django.contrib.auth.hashers import check_password
 from django.contrib import messages
+from django.contrib.auth.views import PasswordChangeView
+from django.urls import reverse_lazy
 
 
 # Create your views here.
-
+class CustomPasswordChangeView(PasswordChangeView):
+    from_class = PasswordChangeView
+    success_url = reverse_lazy('home-page')
 def profile(request):
     return render(request, 'users/profile.html')
 
