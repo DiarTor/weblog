@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm, CommentForm
+from .forms import PostForm, CommentForm, EditPostForm
 from .models import Post, Comment
 from django.http import HttpResponse
-
+from django.utils.datastructures import MultiValueDictKeyError
 
 # Create your views here.
 # @login_required(login_url="/account/login/")
@@ -31,6 +31,28 @@ def create_post(request):
     else:
         form = PostForm()
     return render(request, 'blog/create_post.html', {'form': form})
+
+
+def edit_post(request, post_id):
+    if request.method == "POST":
+        form = EditPostForm(request.POST, request.FILES)
+        if form.is_valid():
+            post = Post.objects.get(id=post_id)
+            if not request.POST['title'] == '':
+                post.title = request.POST['title']
+            if not request.POST['content'] == '':
+                post.content = request.POST['content']
+            try:
+                 if not request.FILES['image'] == '':
+                    post.image = request.FILES['image']
+            except MultiValueDictKeyError:
+                pass
+            post.author = request.user
+            post.save()
+            return redirect('home-page')
+    else:
+        form = EditPostForm()
+    return render(request, 'blog/edit_post.html', {"form": form})
 
 @login_required(login_url="/account/login/")
 def create_comment(request, post_id):

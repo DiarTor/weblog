@@ -17,7 +17,11 @@
                     {% if user == post.author %}
                         <form method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{ post.id}}">Delete</button>
+                            <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{post.id}}">Delete</button>
+                        </form>
+                        <form method="post">
+                            {% csrf_token %}
+                            <a href="{% url 'edit_post' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">Edit</button></a>
                         </form>
                     {% endif %}
                     <a href="{% url 'comments' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">Comment</button></a>
