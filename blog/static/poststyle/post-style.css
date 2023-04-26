@@ -1,5 +1,13 @@
 .rounded-mx-auto-d-block{
-        width: 1251px;
+    width: 40%;
     height: auto;
+}
 
+.searchform{
+    background-color:#212529;
+
+
+}
+.search-label{color: white;
+padding-left : 12px
 }

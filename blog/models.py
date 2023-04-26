@@ -23,5 +23,6 @@ class Comment(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     liked = models.ManyToManyField(User, related_name="like_comment", default=None, blank=True)
 
+    @property
     def __str__(self):
         return f"User : {self.user}"
