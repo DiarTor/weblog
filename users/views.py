@@ -29,7 +29,7 @@ def edit_profile(request):
                     user_username = request.user
                     user_username.username = request.POST['username']
                     user_username.save()
-                    return redirect('home-page')
+                    return redirect('edit_profile')
                 except IntegrityError:
                     messages.error(request, 'Username Is Invalid Please Try Another One.')
                     form = EditProfileForm()
@@ -38,19 +38,19 @@ def edit_profile(request):
                 user_fname = User.objects.get(first_name=request.user.first_name)
                 user_fname.first_name = request.POST['fname']
                 user_fname.save()
-                return redirect('home-page')
+                return redirect('edit_profile')
             # Change Last Name
             if not request.POST['lname'] == '':
                 user_lname = User.objects.get(last_name=request.user.last_name)
                 user_lname.last_name = request.POST['lname']
                 user_lname.save()
-                return redirect('home-page')
+                return redirect('edit_profile')
             # Change Email
             if not request.POST['email'] == '':
                 user_email = User.objects.get(email=request.user.email)
                 user_email.email = request.POST['email']
                 user_email.save()
-                return redirect('home-page')
+                return redirect('edit_profile')
     else:
         form = EditProfileForm()
     return render(request, 'users/edit_profile.html', {'form': form})
