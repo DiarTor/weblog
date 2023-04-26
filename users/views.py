@@ -45,6 +45,12 @@ def edit_profile(request):
                 user_lname.last_name = request.POST['lname']
                 user_lname.save()
                 return redirect('home-page')
+            # Change Email
+            if not request.POST['email'] == '':
+                user_email = User.objects.get(email=request.user.email)
+                user_email.email = request.POST['email']
+                user_email.save()
+                return redirect('home-page')
     else:
         form = EditProfileForm()
     return render(request, 'users/edit_profile.html', {'form': form})
