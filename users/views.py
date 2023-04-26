@@ -14,6 +14,8 @@ from django.urls import reverse_lazy
 class CustomPasswordChangeView(PasswordChangeView):
     from_class = PasswordChangeView
     success_url = reverse_lazy('home-page')
+
+
 def profile(request):
     return render(request, 'users/profile.html')
 
