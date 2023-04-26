@@ -33,6 +33,18 @@ def edit_profile(request):
                 except IntegrityError:
                     messages.error(request, 'Username Is Invalid Please Try Another One.')
                     form = EditProfileForm()
+            # Change First Name
+            if not request.POST['fname'] == '':
+                user_fname = User.objects.get(first_name=request.user.first_name)
+                user_fname.first_name = request.POST['fname']
+                user_fname.save()
+                return redirect('home-page')
+            # Change Last Name
+            if not request.POST['lname'] == '':
+                user_lname = User.objects.get(last_name=request.user.last_name)
+                user_lname.last_name = request.POST['lname']
+                user_lname.save()
+                return redirect('home-page')
     else:
         form = EditProfileForm()
     return render(request, 'users/edit_profile.html', {'form': form})

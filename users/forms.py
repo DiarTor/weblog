@@ -16,6 +16,11 @@ class RegisterForm(UserCreationForm):
 class EditProfileForm(forms.Form):
     username_help_text = "Enter Your New Username"
     username = forms.CharField(max_length=50, help_text=username_help_text, required=False, label="Username :")
+    fname_help_text = "Enter Your New First Name"
+    lname_help_text = "Enter Your New Last Name"
+    username = forms.CharField(max_length=50, help_text=username_help_text, required=False, label="Username :")
+    fname = forms.CharField(max_length=50, help_text=fname_help_text, required=False, label="First Name :")
+    lname = forms.CharField(max_length=50, help_text=lname_help_text, required=False, label="Last Name :")
 
     @property
     def check_exist(self):
