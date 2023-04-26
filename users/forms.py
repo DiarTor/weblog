@@ -13,9 +13,9 @@ class RegisterForm(UserCreationForm):
         fields = ["username", "email", "first_name", "last_name", "password1", "password2"]
 
 
-class ChangeUsernameForm(forms.Form):
+class EditProfileForm(forms.Form):
     username_help_text = "Enter Your New Username"
-    username = forms.CharField(max_length=50, help_text=username_help_text, required=False)
+    username = forms.CharField(max_length=50, help_text=username_help_text, required=False, label="Username :")
 
     @property
     def check_exist(self):
