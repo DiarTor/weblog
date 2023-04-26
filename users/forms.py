@@ -15,7 +15,7 @@ class RegisterForm(UserCreationForm):
 
 class ChangeUsernameForm(forms.Form):
     username_help_text = "Enter Your New Username"
-    new_username = forms.CharField(max_length=50, help_text=username_help_text)
+    username = forms.CharField(max_length=50, help_text=username_help_text, required=False)
 
     @property
     def check_exist(self):
