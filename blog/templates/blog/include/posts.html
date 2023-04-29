@@ -8,23 +8,23 @@
                             {% csrf_token %}
                             <input type="hidden" name="post_id" value="{{ post.id }}">
                             {% if user not in post.liked.all %}
-                                <button class="btn btn-outline-primary me-md-2" type="submit">Like {{ post.liked.all.count }}</button>
+                                <button class="btn btn-outline-primary me-md-2" type="submit">♡ {{ post.liked.all.count }}</button>
                             {% else %}
-                                <button class="btn btn-outline-primary me-md-2" type="submit">Unlike {{ post.liked.all.count }}</button>
+                                <button class="btn btn-outline-primary me-md-2" type="submit">&#10084; {{ post.liked.all.count }}</button>
                             {% endif %}
                         </form>
                     {% endif %}
                     {% if user == post.author %}
                         <form method="post">
                             {% csrf_token %}
-                            <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{post.id}}">Delete</button>
+                            <button type="submit" class="btn btn-outline-danger" name="post-id" value="{{post.id}}">🗑️</button>
                         </form>
                         <form method="post">
                             {% csrf_token %}
-                            <a href="{% url 'edit_post' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">Edit</button></a>
+                            <a href="{% url 'edit_post' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">✏️</button></a>
                         </form>
                     {% endif %}
-                    <a href="{% url 'comments' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">Comment</button></a>
+                    <a href="{% url 'comments' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">💬</button></a>
                 </div>
             </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
