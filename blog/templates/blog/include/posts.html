@@ -1,6 +1,4 @@
-{% load static %}
-<link rel="stylesheet" href="{% static "poststyle/post-style.css" %}">
-<div class="card mt-2">
+ <div class="card mt-2">
             <div class="card-header">
                 <strong>Poster : {{ post.author.username }}</strong>
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -35,13 +33,33 @@
             </div>
             <div class="card-body d-flex flex-row justify-content-between">
                 <div>
-                    <img class="rounded-mx-auto-d-block" src="media/{{ post.image }}" alt="{{ post.title }}">
+                    <img class="rounded mx-auto d-block" src="media/{{ post.image }}" alt="{{ post.title }}">
                     <h5 class="card-title">{{ post.title }}</h5>
                     <hr>
                     <p>{{ post.content }}</p>
-                    <strong>Comments :</strong>
-
-
+                <strong>Comments :</strong><br>
+                        {% for comment in comments %}
+                            {% if post.id == comment.post_id %}
+                                <div class="card mt-2">
+                                    <div class="card-header">
+                                        <strong>User : {{ comment.user.username }}</strong>
+                                        {% if user.is_authenticated %}
+                                            <form action="{% url 'like-comment' %}" method="post">
+                                                {% csrf_token %}
+                                                <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                                                {% if user not in comment.liked.all %}
+                                                    <button class="btn btn-outline-primary me-md-2" type="submit">Like {{ comment.liked.all.count }}</button>
+                                                {% else %}
+                                                    <button class="btn btn-outline-primary me-md-2" type="submit">Unlike {{ comment.liked.all.count }}</button>
+                                                {% endif %}
+                                            </form>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body"><p>{{ comment.content }}</p></div>
+                                    <div class="card-footer">{{ comment.created_date }}</div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
                 </div>
             </div>
         <div class="card-footer text-muted">
