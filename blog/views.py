@@ -11,11 +11,18 @@ def home(request):
     posts = Post.objects.all().order_by('-create_date')
     comments = Comment.objects.all().order_by('-created_date')
     if request.method == "POST":
-        post_id = request.POST.get("post-id")
-        print(post_id)
-        post = Post.objects.filter(id=post_id).first()
-        if post and post.author == request.user:
-            post.delete()
+        try:
+            if request.POST['comment-id']:
+                comment_id = request.POST.get("comment-id")
+                comment = Comment.objects.get(id=comment_id)
+                if comment and comment.user == request.user:
+                    comment.delete()
+        except MultiValueDictKeyError:
+            post_id = request.POST.get("post-id")
+            print(post_id)
+            post = Post.objects.filter(id=post_id).first()
+            if post and post.author == request.user:
+                post.delete()
     return render(request, "blog/home.html", {'posts': posts, 'comments': comments})
 
 
