@@ -25,7 +25,7 @@ def home(request):
                 post.delete()
     return render(request, "blog/home.html", {'posts': posts, 'comments': comments})
 
-# create a post section
+
 @login_required(login_url="/account/login/")
 def create_post(request):
     if request.method == "POST":
@@ -39,7 +39,7 @@ def create_post(request):
         form = PostForm()
     return render(request, 'blog/create_post.html', {'form': form})
 
-# edit post section
+
 def edit_post(request, post_id):
     if request.method == "POST":
         form = EditPostForm(request.POST, request.FILES)
@@ -60,7 +60,7 @@ def edit_post(request, post_id):
     else:
         form = EditPostForm()
     return render(request, 'blog/edit_post.html', {"form": form})
-# create a comment section
+
 @login_required(login_url="/account/login/")
 def create_comment(request, post_id):
     if request.method == "POST":
@@ -75,7 +75,7 @@ def create_comment(request, post_id):
         form = CommentForm()
     return render(request, 'blog/comment.html', {"form": form})
 
-# like post section
+
 def like_post(request):
     user = request.user
     if request.method == "POST":
@@ -86,7 +86,7 @@ def like_post(request):
     else:
         post.liked.add(user)
     return redirect("home-page")
-# like comment section
+
 def like_comment(request):
     user = request.user
     if request.method == "POST":
