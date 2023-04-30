@@ -3,7 +3,9 @@
 Home Page
 {% endblock %}
 {% block content %}
+{#    post loop#}
     {% for post in posts %}
+{#        include section#}
         {% include 'blog/include/posts.html' %}
         {% empty %}
         <p>No Posts</p>
