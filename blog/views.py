@@ -19,7 +19,6 @@ def home(request):
                     comment.delete()
         except MultiValueDictKeyError:
             post_id = request.POST.get("post-id")
-            print(post_id)
             post = Post.objects.filter(id=post_id).first()
             if post and post.author == request.user:
                 post.delete()
