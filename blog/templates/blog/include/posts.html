@@ -51,14 +51,14 @@
                                                     <button class="btn btn-outline-primary me-md-2" type="submit">♡ {{ comment.liked.all.count }}</button>
                                                 {% else %}
                                                     <button class="btn btn-outline-primary me-md-2" type="submit">&#10084; {{ comment.liked.all.count }}</button>
-                                                    {% endif %}
+                                                {% endif %}
                                             </form>
-                                            {% if user == post.author %}
-                                                        <form method="post">
-                                                            {% csrf_token %}
-                                                            <button type="submit" class="btn btn-outline-danger" name="comment-id" value="{{comment.id}}">🗑️</button>
-                                                            </form>
-                                                    {% endif %}
+                                            {% if user.id == comment.user_id %}
+                                                <form method="post">
+                                                    {% csrf_token %}
+                                                    <button type="submit" class="btn btn-outline-danger" name="comment-id" value="{{comment.id}}">🗑️</button>
+                                                </form>
+                                            {% endif %}
                                         {% endif %}
                                     </div>
                                     <div class="card-body"><p>{{ comment.content }}</p></div>
