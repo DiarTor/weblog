@@ -42,19 +42,19 @@ class EditProfile(View):
                         form = EditProfileForm()
                 # Change First Name
                 if not request.POST['fname'] == '':
-                    user_fname = User.objects.get(first_name=request.user.first_name)
+                    user_fname = User.objects.get(id=request.user.id)
                     user_fname.first_name = request.POST['fname']
                     user_fname.save()
                     return redirect('edit_profile')
                 # Change Last Name
                 if not request.POST['lname'] == '':
-                    user_lname = User.objects.get(last_name=request.user.last_name)
+                    user_lname = User.objects.get(id=request.user.id)
                     user_lname.last_name = request.POST['lname']
                     user_lname.save()
                     return redirect('edit_profile')
                 # Change Email
                 if not request.POST['email'] == '':
-                    user_email = User.objects.get(email=request.user.email)
+                    user_email = User.objects.get(id=request.user.id)
                     user_email.email = request.POST['email']
                     user_email.save()
                     return redirect('edit_profile')
