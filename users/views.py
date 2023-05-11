@@ -41,16 +41,16 @@ class EditProfile(View):
                         messages.error(request, 'Username Is Invalid Please Try Another One.')
                         form = EditProfileForm()
                 # Change First Name
-                if not request.POST['fname'] == '':
-                    user_fname = User.objects.get(id=request.user.id)
-                    user_fname.first_name = request.POST['fname']
-                    user_fname.save()
+                if not request.POST['first_name'] == '':
+                    user_first_name = User.objects.get(id=request.user.id)
+                    user_first_name.first_name = request.POST['first_name']
+                    user_first_name.save()
                     return redirect('edit_profile')
                 # Change Last Name
-                if not request.POST['lname'] == '':
-                    user_lname = User.objects.get(id=request.user.id)
-                    user_lname.last_name = request.POST['lname']
-                    user_lname.save()
+                if not request.POST['last_name'] == '':
+                    user_last_name = User.objects.get(id=request.user.id)
+                    user_last_name.last_name = request.POST['last_name']
+                    user_last_name.save()
                     return redirect('edit_profile')
                 # Change Email
                 if not request.POST['email'] == '':
