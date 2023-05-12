@@ -24,7 +24,9 @@
                             <a href="{% url 'edit_post' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">✏️</button></a>
                         </form>
                     {% endif %}
+                    {% if user.is_authenticated %}
                     <a href="{% url 'comments' post_id=post.id %}"><button class="btn btn-outline-primary me-md-2" type="button">💬</button></a>
+                    {% endif %}
                 </div>
             </div>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
