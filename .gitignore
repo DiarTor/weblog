@@ -5,6 +5,7 @@ __pycache__
 media
 env
 venv
+.venv
 Lib
 Scripts
 *.sqlite3
