@@ -6,8 +6,10 @@ Remember that this project is designed to be simple and easy to use with simply 
 
 ## Features
 - User authentication
+- Edit your profile
 - Create, edit, and delete blog posts
-- View and comment on other users posts
+- Create, edit, and delete comments
+- View, comment and like other users posts
 - Responsive design for mobile and desktop
 
 ## Installation
